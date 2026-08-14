@@ -21,12 +21,14 @@
 
 ### 方式二：Python 源码运行
 
-需要 Python 3.10+ 与 Node.js（含 `dsh` 命令）：
+需要 Python 3.10+ 与 Node.js（含 `npm`，首次运行会自动安装 `dsh`）：
 
 ```bash
 pip install -r requirements.txt
 python dsh_launcher.py
 ```
+
+Windows 下也可直接双击 `run.bat` 测试，支持指定端口：`run.bat 3090`。
 
 ## 🔨 构建 exe
 
