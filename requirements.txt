@@ -1,0 +1,6 @@
+# 运行时依赖
+pywebview>=6.0
+
+# 构建 exe / 生成图标所需（可选）
+pyinstaller>=6.0
+Pillow>=10.0
