@@ -4,6 +4,7 @@
 
 ## ✨ 功能
 
+- **自动安装**：启动时自动检测 DeepSeek Harness（`dsh`）是否已安装，未安装则先弹出「正在安装」窗口，执行 `npm install -g @deepseek-ai/dsh`，安装完成后再启动主界面。
 - **一键启动**：自动拉起 `dsh web` 后端服务，并用 [pywebview](https://pywebview.flowrl.com/)（Windows 下基于 WebView2）以原生窗口加载 Web UI，体验接近桌面软件。
 - **智能复用**：若检测到 DSH 已在运行（默认 `127.0.0.1:3080`），直接复用，不重复启动。
 - **自动清理**：关闭窗口后，自动结束由本程序启动的后端进程（复用已有实例时则不影响它）。
@@ -15,7 +16,7 @@
 
 从 [Releases](../../releases) 下载 `DeepSeekHarness.exe`，双击运行即可。
 
-> 前置条件：本机已安装 Node.js 且可通过 `dsh` 或 `npx` 使用 `@deepseek-ai/dsh`。
+> 前置条件：本机已安装 Node.js（含 `npm`）。首次启动会自动安装 `@deepseek-ai/dsh`（`dsh` 命令）。
 > 后端日志写入 `%LOCALAPPDATA%\DeepSeekHarness\dsh-web.log`。
 
 ### 方式二：Python 源码运行
