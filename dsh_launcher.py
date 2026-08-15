@@ -223,8 +223,11 @@ def main():
         except Exception as exc:
             show_error(str(exc))
             sys.exit(1)
+        # text_select=True：否则 pywebview 会注入 user-select:none 的全局样式，
+        # 导致 WebUI 中无法用鼠标框选文本并复制（浏览器里正常，桌面窗口里失效）。
         window = webview.create_window(
             APP_NAME, URL, width=1280, height=820, min_size=(900, 600),
+            text_select=True,
         )
         try:
             webview.start()
@@ -234,6 +237,7 @@ def main():
     else:
         window = webview.create_window(
             APP_NAME, html=INSTALLING_HTML, width=460, height=320, resizable=False,
+            text_select=True,
         )
         try:
             webview.start(_install_then_launch, (window, logfile))

@@ -32,6 +32,10 @@ Windows 下也可直接双击 `run.bat` 测试，支持指定端口：`run.bat 3
 
 ## 🔨 构建 exe
 
+**方式一：双击 `build.bat`（推荐）**——一键检查 Python/依赖，若检测到桌面版正在运行会提示是否先关闭（避免 exe 被占用导致打包失败），完成后输出 `dist\DeepSeekHarness.exe`。
+
+**方式二：PowerShell 手动打包**
+
 ```powershell
 pip install -r requirements.txt
 .\build.ps1
