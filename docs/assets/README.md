@@ -27,22 +27,25 @@
 > 说明：任务要求覆盖 `#0A1424` 深蓝底与 `#101319` 品牌深底，二者相近，主图采用 `#0A1424`（更贴合蓝图）；品牌蓝仅作为 `#4d6bfe` 点缀（虚线框、鲸鱼半透明填充、标签描边）。
 
 
-## 二、构图
+## 二、构图（v2 减法重设计：极简聚焦 · 强留白）
 
-### ① 社交预览图 1200×630
-- **左：鲸鱼卡**（470×412）——官方鲸鱼**独立成框**（自带四边准星括号 + 外侧虚线环），居中偏下；鲸鱼主体只占卡片中下部，不与任何标注共区。
-- **卡内标注按区域分工、互不重叠**：顶部左侧 = MOUNT / WHALE.SVG / 坐标 标注列；底部左侧 = SCALE 1:1 / OFFICIAL MARK；二者与鲸鱼纵向错开。
-- **右：标题块**——顶部 `SPEC / BLUEPRINT COVER v2.0` + 带刻度横线；主标题 `DSH Desktop`（78px，DSH 青 / Desktop 白）；中文副标题「DeepSeek Harness 桌面版」（40px）；分隔线 + 橙色菱形节点。
-- **价值三角**：三个卡片型 chip「一键启动 · 远程访问 · 插件市场」，末位橙色强调。
-- **底部标签带**：`[v2.0] [Node→DSH→插件 · 自动引导] [服务守护]`（等宽字体，CJK 感知宽度，文字不溢出框、框不越画布）。
-- **工程图装饰**：左上 `[FIG.01]`、右上 `[STATUS: ACTIVE]` 橙色印章、下缘 1200px 尺寸刻度、右缘 630px 竖标、右下坐标 `@ 1200 x 630`。
-- 四周均留有 >40px 安全边距，标签按 CJK 1em 计宽，GitHub 压缩后小字仍清晰。
+设计方向切换为**减法**：只保留核心信息与唯一图形焦点，删去全部技术性装饰（坐标/尺寸刻度/准星括号群/MOUNT・SCALE・OFFICIAL・STATUS 等标签、流水线三框、AUTO-BOOTSTRAP/3-STAGE），保证缩到 GitHub README 宽度仍清晰、不碎不乱。
 
-### ② README 横幅 1280×320
-- **左列（x≤760）**：鲸鱼（108px，居中于准星环）+ `WHALE.SVG` 标注；竖分隔线；主标题 `DSH Desktop`（60px，与标语间距 ≥30px）+ 中文 slogan（26px）「一键零配置 · 远程访问 · 服务守护」+ 英文副题（13px）。
-- **右列（x≥800）**：三级引导流水线 `Node.js → DSH → 插件`（橙色箭头连接）+ `AUTO-BOOTSTRAP CHAIN` / `3-STAGE` 刻度 + `服务守护` / `v2.0` 标签。
-- 左、右两列水平隔离（≤760 vs ≥800），垂直带不共享，任何元素不跨列、不重叠。
-- 上下两条 mono 头尾行 + 左右准星括号框，整体垂直居中。
+### ① 社交预览图 1200×630 —— 居中英雄式
+- **鲸鱼**（唯一图形焦点，240px）正中央，配一圈极淡虚线环；上空与两侧大留白。
+- **主标题** `DSH Desktop`（92px，DSH 青 / Desktop 白）居中于鲸鱼下方。
+- **副标题** `DeepSeek Harness 桌面版`（40px，沉稳灰），与标题留足间距。
+- **三个 chip**（一键启动 / 远程访问 / 插件市场，30px；末位橙色强调）居中一行，圆角微线框。
+- **一行极小编号** `[ v2.0 · WINDOWS DOT-AND-PLAY LAUNCHER ]`（16px mono）。
+- 核心可见元素：鲸鱼 + 标题 + 副标题 + 3 chip + 版本行 = **7 个**；纵向节奏为 鲸鱼→标题→副标题→chips→版本，各带充足呼吸空间。
+
+### ② README 横幅 1280×320 —— 横向极简
+- **鲸鱼**（150px）居中于画布垂直中线、靠左，唯一图形焦点。
+- **主标题** `DSH Desktop`（92px）+ **slogan** `一键零配置 · 远程访问 · 服务守护`（40px）+ **一行 meta**（16px：`DESKTOP LAUNCHER FOR DEEPSEEK HARNESS · v2.0 · WINDOWS`）。
+- 仅一条极淡竖向分隔线衔接鲸鱼与文字区；无准星、无刻度、无坐标、无版本框。
+- 核心可见元素：鲸鱼 + 标题 + slogan + meta = **4 个**，右侧留白充足。
+
+> 两图仅保留元素间 ≥24px 呼吸间距与四周 ≥40px 安全边距；色板 / 网格（更稀疏更淡）/ 鲸鱼资产不变。
 
 
 ## 三、字体
@@ -73,11 +76,10 @@
 cd docs/assets/_render && npm install && node render2x.js   # 输出到 docs/assets/*.png
 ```
 
-- **改文案**：`docs/assets/_build/build_svgs.py` 里 `build_social()` / `build_banner()` 的字符串（标题、slogan、标签、坐标）。中文直接改，无需动布局。
+- **改文案**：`docs/assets/_build/build_svgs.py` 里 `build_social()` / `build_banner()` 的字符串（标题、slogan、chip、版本行）。中文直接改，无需动布局。
 - **改配色**：文件顶部色板常量（`BG / CYAN / BRAND / ACCENT / INK / MUTED / GRID / STROKE`）。
-- **改布局 / 尺寸**：调整左右栏起点（如 `rx`、`lx/ly/lw/lh`、`px/py`），或直接改 `W/H` 画布并同步 PNG 输出。
-- **改鲸鱼**：`whale_group(cx, cy, s)` 控制圆心与缩放；`s` 越大鲸鱼越大。
-- 两图共用同一批函数（`bracket` 准星、`dataline` 刻度、`tagchip` 标签、`grid`），改一处即同步两图，保证视觉一致。
+- **改鲸鱼**：`whale_group(cx, cy, s)` 控制圆心与缩放；`s` 越大鲸鱼越大（social 240 / banner 150）。
+- **网格密度**：`sparse_grid(w,h,step,opacity)` 控制背景网格疏密与透明度（当前 step 48、opacity 0.028，极淡）。
 
 > 也可直接打开 `docs/assets/preview.html` 实时预览效果；PNG 为 @2x，直接用于 README / 社交图。
 
@@ -91,6 +93,6 @@ cd docs/assets/_render && npm install && node render2x.js   # 输出到 docs/ass
   .venv/Scripts/python docs/assets/_build/check_overlap.py
   ```
 - 生成端 `_build/build_svgs.py` 在排版 tag/chip 时用同一套 resvg 实测宽度（含 letter-spacing）为框定尺寸，保证文字始终完整落在框内、互不越界。
-- **像素采样复核**：渲染 @2x PNG 后对 chip 间隙 / 标签行间隙 / 副标题↔尺寸标注 / 右侧边缘做采样，间隙区内容点 ≈0；此前实测曝光的 4 处「chip 拥挤、副标题碰 630px 标注、标签溢出、右缘密集」均已消除（剩余仅 `630 px` 旋转标注本身这一有意元素）。
-- 比例 / 安全区 / 关键间距已用坐标+像素双重核对：左右两栏、卡内标注区、横幅标题↔标语间距（实测 ≥30px）、标签行均不重叠、不越界。
+- **同尺寸减法复核（v2 重设计）**——像素密度实测：内实块数 横幅 **4** 组（=鲸鱼/标题/slogan/meta）、社交 **7** 组（=鲸鱼/标题/副标题/3chip/版本）；非背景内容墨占比 横幅 **≈10.7%**、社交 **≈10.4%**（均远低于 15% 阈值），留白主导、无视觉过载。
+- **像素采样复核**：渲染 @2x PNG 后对各间隙区采样，内容点 ≈0；此前实测曝光的「chip 拥挤/标签溢出/右缘密集」随装饰元素一并消除。
 - 字体为系统栈，用户机器缺 Consolas / Microsoft YaHei 时会自动回退到等宽 / 无衬线条形栈，不会因缺字体渲染失败。
