@@ -30,18 +30,19 @@
 ## 二、构图
 
 ### ① 社交预览图 1200×630
-- **左：鲸鱼卡**（470×412）——官方鲸鱼居中，蓝色半透明浮层 + 电光青实线描边 + 蓝品牌蓝虚线「幻影」底衬；卡片四周准星括号 + 内层虚线衬框；卡顶 `MOUNT / WHALE.SVG`、卡底 `SCALE 1:1 / OFFICIAL MARK` 技术标注。
-- **右：标题块**——顶部 `SPEC / BLUEPRINT COVER v2.0` + 带刻度的横线；主标题 `DSH Desktop`（96px 粗体，DSH 青 / Desktop 白）；中文副标题「DeepSeek Harness 桌面版」（40px）；分隔线 + 橙色菱形节点。
-- **价值三角**：三个卡片型 chip「一键启动 · 远程访问 · 插件市场」，末位用橙色强调。
-- **底部标签带**：`[v2.0] [Node → DSH → 插件 自动引导] [服务守护]`（等宽字体，功能标签体系）。
+- **左：鲸鱼卡**（470×412）——官方鲸鱼**独立成框**（自带四边准星括号 + 外侧虚线环），居中偏下；鲸鱼主体只占卡片中下部，不与任何标注共区。
+- **卡内标注按区域分工、互不重叠**：顶部左侧 = MOUNT / WHALE.SVG / 坐标 标注列；底部左侧 = SCALE 1:1 / OFFICIAL MARK；二者与鲸鱼纵向错开。
+- **右：标题块**——顶部 `SPEC / BLUEPRINT COVER v2.0` + 带刻度横线；主标题 `DSH Desktop`（78px，DSH 青 / Desktop 白）；中文副标题「DeepSeek Harness 桌面版」（40px）；分隔线 + 橙色菱形节点。
+- **价值三角**：三个卡片型 chip「一键启动 · 远程访问 · 插件市场」，末位橙色强调。
+- **底部标签带**：`[v2.0] [Node→DSH→插件 · 自动引导] [服务守护]`（等宽字体，CJK 感知宽度，文字不溢出框、框不越画布）。
 - **工程图装饰**：左上 `[FIG.01]`、右上 `[STATUS: ACTIVE]` 橙色印章、下缘 1200px 尺寸刻度、右缘 630px 竖标、右下坐标 `@ 1200 x 630`。
-- 四周均留有 >55px 安全边距，GitHub 压缩后小字仍清晰（标签字号 24px+、高对比）。
+- 四周均留有 >40px 安全边距，标签按 CJK 1em 计宽，GitHub 压缩后小字仍清晰。
 
 ### ② README 横幅 1280×320
-- **左：鲸鱼**（约 116px）居中于竖向准星圈 + 基准十字；`WHALE.SVG` 版权标注。
-- **中：标题块**——`DSH Desktop`（84px）+ 中文 slogan「一键启动 · 零配置 · 远程访问 · 服务守护」（36px）+ 英文导语（等宽小字），整体垂直居中。
-- **右：三级引导流水线**——`Node.js → DSH → 插件` 三个流程框（橙色箭头连接），下接 `3-STAGE` 刻度线 + `服务守护` / `v2.0` 标签。
-- 上下两条 mono 头尾行（左：`DSH-DESKTOP / RELEASE 2.0`；右：`1280 × 320`），左右准星括号框。
+- **左列（x≤760）**：鲸鱼（108px，居中于准星环）+ `WHALE.SVG` 标注；竖分隔线；主标题 `DSH Desktop`（60px，与标语间距 ≥30px）+ 中文 slogan（26px）「一键零配置 · 远程访问 · 服务守护」+ 英文副题（13px）。
+- **右列（x≥800）**：三级引导流水线 `Node.js → DSH → 插件`（橙色箭头连接）+ `AUTO-BOOTSTRAP CHAIN` / `3-STAGE` 刻度 + `服务守护` / `v2.0` 标签。
+- 左、右两列水平隔离（≤760 vs ≥800），垂直带不共享，任何元素不跨列、不重叠。
+- 上下两条 mono 头尾行 + 左右准星括号框，整体垂直居中。
 
 
 ## 三、字体
@@ -84,5 +85,12 @@ cd docs/assets/_render && npm install && node render2x.js   # 输出到 docs/ass
 ## 六、验证
 
 - 两个 SVG 均已通过 XML well-formed 校验 + `@resvg/resvg-js` 实测渲染成 PNG（含 CJK 中文与系统字体），无语法错误。
-- 比例 / 安全区 / 文字可读性已用像素分析核对：主体均落在安全区内（四周 ≥40px），标题与标签字号符合 ≥28px 的要求，GitHub 压缩缩略图仍可读。
+- **重叠/越界自检（像素级）**（`docs/assets/_build/check_overlap.py` + `_render/measure_texts.mjs`）：将每个 `<text>` 用 `@resvg/resvg-js` **单独实测渲染**，取其真实墨迹包围盒（自动处理 `text-anchor=end`、`rotate(-90)`、`letter-spacing`、CJK 宽度）；chip/tag 框与鲸鱼 group 用其精确 SVG 几何。断言两两不相交（容差 0px，「文字位于自身 chip 框内」视为有意包含并排除）且全部落在画布内（含右缘：`bbox.max_x <= canvas width`）。当前**两个文件均 PASS**。运行：
+  ```bash
+  cd docs/assets/_render && npm install   # 首次需装 @resvg/resvg-js + pngjs
+  .venv/Scripts/python docs/assets/_build/check_overlap.py
+  ```
+- 生成端 `_build/build_svgs.py` 在排版 tag/chip 时用同一套 resvg 实测宽度（含 letter-spacing）为框定尺寸，保证文字始终完整落在框内、互不越界。
+- **像素采样复核**：渲染 @2x PNG 后对 chip 间隙 / 标签行间隙 / 副标题↔尺寸标注 / 右侧边缘做采样，间隙区内容点 ≈0；此前实测曝光的 4 处「chip 拥挤、副标题碰 630px 标注、标签溢出、右缘密集」均已消除（剩余仅 `630 px` 旋转标注本身这一有意元素）。
+- 比例 / 安全区 / 关键间距已用坐标+像素双重核对：左右两栏、卡内标注区、横幅标题↔标语间距（实测 ≥30px）、标签行均不重叠、不越界。
 - 字体为系统栈，用户机器缺 Consolas / Microsoft YaHei 时会自动回退到等宽 / 无衬线条形栈，不会因缺字体渲染失败。
