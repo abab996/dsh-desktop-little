@@ -2,6 +2,10 @@
 
 把 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 的 Web UI 封装成**原生桌面应用**的启动器。双击即可使用，无需再手动敲命令行。
 
+<p align="center">
+  <img src="docs/assets/banner.png" alt="DSH Desktop — 一键启动 · 远程访问 · 插件市场" width="100%">
+</p>
+
 ## 🚀 v2.0 亮点
 
 - **一键零配置启动**：按 **Node.js → DSH → 插件** 三级自动引导；全部就绪时直接进入主界面、不弹安装窗。

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSH Desktop · 品牌封图预览 Preview</title>
+<style>
+  :root{
+    --bg:#0A1424; --cyan:#00F0FF; --brand:#4D6BFE; --orange:#FF5E00;
+    --ink:#E6F4F7; --mut:#6C7E99;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Segoe UI","Microsoft YaHei",-apple-system,sans-serif;
+    background:#050b16;color:var(--ink);padding:48px 32px;line-height:1.6;
+  }
+  h1{font-weight:800;font-size:26px;letter-spacing:.04em}
+  h1 .a{color:var(--cyan)}h1 .b{color:var(--ink)}
+  .sub{color:var(--mut);font-family:Consolas,monospace;margin:6px 0 34px;font-size:14px;letter-spacing:.05em}
+  .card{margin:0 auto 48px;max-width:1240px}
+  .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+  .hd h2{font-size:16px;color:var(--cyan);font-weight:600;letter-spacing:.06em}
+  .hd span{color:var(--mut);font-size:13px;font-family:Consolas,monospace}
+  .frame{background:rgba(0,240,255,.04);border:1px solid rgba(0,240,255,.25);
+    border-radius:4px;padding:14px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+  img{display:block;width:100%;height:auto;border-radius:2px;background:#0A1424}
+  .grid-note{margin-top:14px;color:var(--mut);font-size:13px;font-family:Consolas,monospace}
+  .badge{color:var(--orange)}
+  .notes{margin-top:40px;max-width:960px;color:var(--mut);font-size:13px}
+  .notes li{margin-bottom:6px}
+  code{background:rgba(0,240,255,.08);padding:1px 6px;border-radius:3px;color:var(--cyan);font-family:Consolas,monospace}
+  a{color:var(--cyan)}
+</style>
+</head>
+<body>
+  <h1><span class="a">DSH</span> <span class="b">Desktop</span> · 品牌封图 Brand Covers</h1>
+  <div class="sub">DARK BLUEPRINT  //  1200×630 SOCIAL PREVIEW  ·  1280×320 README BANNER  &nbsp;[v2.0]</div>
+
+  <section class="card">
+    <div class="hd"><h2>① GitHub 社交预览 · social-preview.svg <span class="badge">1200×630</span></h2><span>PNG @2x: 2400×1260</span></div>
+    <div class="frame"><img src="social-preview.png" alt="DSH Desktop social preview"></div>
+    <div class="grid-note">SVG source: <code>social-preview.svg</code> ｜ PNG: <code>social-preview.png</code></div>
+  </section>
+
+  <section class="card">
+    <div class="hd"><h2>② README 横幅 · banner.svg <span class="badge">1280×320</span></h2><span>PNG @2x: 2560×640</span></div>
+    <div class="frame"><img src="banner.png" alt="DSH Desktop banner"></div>
+    <div class="grid-note">SVG source: <code>banner.svg</code> ｜ PNG: <code>banner.png</code></div>
+  </section>
+
+  <div class="notes">
+    <h2>Verification / 验收说明</h2>
+    <ul>
+      <li>两图使用同一套设计系统（色板/网格/标签/鲸鱼资产），视觉统一。</li>
+      <li>鲸鱼路径来自官方 <code>favicon.svg</code>，蓝图风风格化（线框 + 电光青描边 + 蓝色半透明浮层）。</li>
+      <li>SVG 完全自包含：无外链、无 <code>@import</code> 字体，字体为系统栈，可离线渲染。</li>
+      <li>用 <code>@resvg/resvg-js</code> 实测渲染成 PNG 通过（含 CJK 与系统字体）。</li>
+    </ul>
+  </div>
+</body>
+</html>
